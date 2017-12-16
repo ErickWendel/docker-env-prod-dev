@@ -4,6 +4,10 @@ LABEL maintaner="erickwendel"
 
 ARG app_name
 
+ARG port
+
+ENV PORT $port
+
 ENV APP $app_name
 
 ENV VOLUME_DIR /usr/share/"${app_name}"
@@ -24,4 +28,5 @@ RUN npm run build
 
 CMD [ "npm", "start" ]
 
-EXPOSE 3000
+
+EXPOSE "${PORT}"
