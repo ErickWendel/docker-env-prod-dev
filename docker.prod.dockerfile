@@ -2,17 +2,19 @@ FROM node:8-alpine
 
 LABEL maintaner="erickwendel"
 
-ENV ENVIRONMENT $ENV
+ARG app_name
 
-RUN mkdir -p docker-api
+ENV VOLUME_DIR /usr/share/"${app_name}"
 
-ADD ./package.json /docker-api/package.json
+RUN mkdir -p "${app_name}"
 
-WORKDIR /docker-api
+ADD ./package.json "${VOLUME_DIR}"/package.json
 
-RUN npm i --silent --production 
+WORKDIR "${VOLUME_DIR}"
 
-ADD . /docker-api
+RUN npm i --silent --production
+
+ADD . "${VOLUME_DIR}"
 
 RUN rm -rf tests
 
