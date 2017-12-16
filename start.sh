@@ -15,5 +15,5 @@ else
     echo Running in Development Env
 fi
 echo
-docker build -t "${foldername}" . -f "${dockerfile}"
-docker run -it -d -p  "$PORT":"$PORT" -v "${PWD}:/usr/share/${foldername}" "${foldername}"
+sudo docker build -t "${foldername}" . -f "${dockerfile}"
+sudo docker run -it -d -p  "$PORT":"$PORT" -v "${PWD}:/usr/share/${foldername}" "${foldername}"

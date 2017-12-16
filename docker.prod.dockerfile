@@ -10,7 +10,6 @@ ADD ./package.json /docker-api/package.json
 
 WORKDIR /docker-api
 
-
 RUN npm i --silent --production 
 
 ADD . /docker-api
@@ -22,6 +21,5 @@ RUN npm i -g typescript pm2 --silent
 RUN npm run build
 
 CMD [ "npm", "run", "prod" ]
-
 
 EXPOSE 3000
