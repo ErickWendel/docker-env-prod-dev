@@ -16,4 +16,4 @@ else
 fi
 echo
 docker build -t "${foldername}" . -f "${dockerfile}"
-docker run -it -p  "$PORT":"$PORT" -v "${PWD}:/usr/share/${foldername}" "${foldername}"
+docker run -it -d -p  "$PORT":"$PORT" -v "${PWD}:/usr/share/${foldername}" "${foldername}"
