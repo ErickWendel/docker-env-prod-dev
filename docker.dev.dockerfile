@@ -2,23 +2,26 @@ FROM node:8-alpine
 
 LABEL maintaner="erickwendel"
 
-ENV ENVIRONMENT $ENV
+ARG app_name
 
-RUN mkdir -p docker-api
+ENV APP $app_name
 
-ADD ./package.json /usr/share/docker-api/package.json
+ENV VOLUME_DIR /usr/share/"${app_name}"
 
-WORKDIR /usr/share/docker-api
+RUN mkdir -p "${app_name}"
+
+ADD ./package.json "${VOLUME_DIR}"/package.json
+
+WORKDIR "${VOLUME_DIR}"
 
 RUN npm i --silent
 
-ADD . /usr/share/docker-api
+ADD . "${VOLUME_DIR}"
 
 RUN npm i -g typescript nodemon --silent
 
 RUN npm run build
 
 CMD [ "npm", "start" ]
-
 
 EXPOSE 3000
